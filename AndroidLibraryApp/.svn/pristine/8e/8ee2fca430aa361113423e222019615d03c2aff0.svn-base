@@ -1,0 +1,228 @@
+package cs534.team3.phase1.database;
+
+import cs534.team3.phase1.Product;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+/**
+ * This class is the link between the activities and the SQLite database.
+ * 
+ * @author Natacha Gabbamonte 0932340
+ * @author Caroline Castonguay-Boisvert 084348
+ * @author Gabriel Gheorghian 0737019
+ * 
+ *         Project CS534.team3.phase1
+ * 
+ */
+public class DBHelper extends SQLiteOpenHelper {
+
+	private static final String DATABASE_NAME = "products.db";
+	private static final int DATABASE_VERSION = 1;
+
+	// Tags for logging
+	private String tag = null;
+	@SuppressWarnings("unused")
+	private String debugTag = null;
+
+	// Table name and columns
+	public static final String TABLE_NAME = "Products";
+	public static final String COLUMN_ID = "_id";
+	public static final String COLUMN_MYSQL_ID = "MySQL_id";
+	public static final String COLUMN_QUANTITY = "Quantity";
+	public static final String COLUMN_GENRE = "Genre";
+	public static final String COLUMN_PLATFORM = "Platform";
+	public static final String COLUMN_NAME = "Name";
+	public static final String COLUMN_IMAGE = "Image";
+	public static final String COLUMN_IMAGE_URL = "Image_Url";
+	public static final String COLUMN_DESCRIPTION = "Description";
+	public static final String COLUMN_PRICE = "Price";
+	public static final String COLUMN_TAXABLE = "Taxable";
+	public static final String COLUMN_CREATED = "Created";
+	public static final String COLUMN_MODIFIED = "Modified";
+
+	// Creation SQL statement
+	private static final String DATABASE_CREATE = "create table " + TABLE_NAME
+			+ " ( " + COLUMN_ID + " integer primary key autoincrement, "
+			+ COLUMN_MYSQL_ID + " integer not null, " + COLUMN_QUANTITY
+			+ " integer, " + COLUMN_GENRE + " text not null, "
+			+ COLUMN_PLATFORM + " text not null, " + COLUMN_NAME + " text, "
+			+ COLUMN_IMAGE + " BLOB, " + COLUMN_IMAGE_URL + " text, "
+			+ COLUMN_DESCRIPTION + " text " + COLUMN_PRICE + " real, "
+			+ COLUMN_TAXABLE + " integer(1), " + COLUMN_CREATED + " DATETIME, "
+			+ COLUMN_MODIFIED + " DATETIME);";
+
+	/**
+	 * Constructor
+	 * 
+	 * @param context
+	 *            The context
+	 */
+	public DBHelper(Context context, String tag) {
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		this.tag = tag;
+		this.debugTag = tag + " Debug";
+	}
+
+	/**
+	 * Creates the table.
+	 */
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		try {
+			db.execSQL(DATABASE_CREATE);
+		} catch (Exception e) {
+			Log.e(tag,
+					"Exception caught while creating the database:\n"
+							+ e.getClass() + " " + e.getMessage());
+		}
+	}
+
+	/**
+	 * When upgraded the table is dropped and then recreated.
+	 */
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		Log.w(DBHelper.class.getName(), "Upgrading database from version "
+				+ oldVersion + " to " + newVersion
+				+ ". All old data will be destroyed in the process.");
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+		onCreate(db);
+	}
+
+	/**
+	 * Returns all the products contained in the database.
+	 * 
+	 * @return all the products contained in the database
+	 */
+	public Cursor getAllProducts() {
+		return getReadableDatabase().query(TABLE_NAME, null, null, null, null,
+				null, null);
+	}
+
+	/**
+	 * Returns all of the products corresponding to the platforms.
+	 * 
+	 * @param platforms
+	 *            the platform filters
+	 * @return the products that correspond to the platforms
+	 */
+	public Cursor getProductsForPlatforms(String[] platforms) {
+		String whereClause = COLUMN_PLATFORM + " = ?";
+		for (int i = 1; i < platforms.length; i++)
+			whereClause += " OR " + COLUMN_PLATFORM + " = ?";
+
+		return getReadableDatabase().query(TABLE_NAME, null, whereClause,
+				platforms, null, null, null);
+	}
+
+	/**
+	 * Returns all of the products corresponding to the genres.
+	 * 
+	 * @param genres
+	 *            the genre filters
+	 * @return the products that correspond to the genres
+	 */
+	public Cursor getProductsByGenres(String[] genres) {
+		String whereClause = COLUMN_GENRE + " = ?";
+		for (int i = 1; i < genres.length; i++)
+			whereClause += " OR " + COLUMN_GENRE + " = ?";
+
+		return getReadableDatabase().query(TABLE_NAME, null, whereClause,
+				genres, null, null, null);
+	}
+
+	/**
+	 * Gets a product based on the name
+	 * 
+	 * @param name
+	 *            the name of the product
+	 * @return the product
+	 */
+	public Cursor getProducts(String name) {
+		return getReadableDatabase().query(TABLE_NAME, null, "COLUMN_NAME = ?",
+				new String[] { name }, null, null, null);
+	}
+
+	/**
+	 * Gets a product based on the id
+	 * 
+	 * @param id
+	 *            the id of the product
+	 * @return the product
+	 */
+	public Product getProduct(int id) {
+		Product product = null;
+
+		Cursor cursor = getReadableDatabase().query(TABLE_NAME, null,
+				"COLUMN_ID = ?", new String[] { String.valueOf(id) }, null,
+				null, null);
+
+		if (cursor != null) {
+			if (cursor.moveToNext()) {
+				product = new Product();
+				product.set_id(cursor.getInt(cursor.getColumnIndex(COLUMN_ID)));
+				product.setQuantity(cursor.getInt(cursor
+						.getColumnIndex(COLUMN_QUANTITY)));
+				product.setGenre(cursor.getString(cursor
+						.getColumnIndex(COLUMN_GENRE)));
+				product.setPlatform(cursor.getString(cursor
+						.getColumnIndex(COLUMN_PLATFORM)));
+				product.setName(cursor.getString(cursor
+						.getColumnIndex(COLUMN_NAME)));
+				product.setImageURL(cursor.getString(cursor
+						.getColumnIndex(COLUMN_IMAGE_URL)));
+				product.setPhpId(cursor.getInt(cursor
+						.getColumnIndex(COLUMN_MYSQL_ID)));
+				product.setDescription(cursor.getString(cursor
+						.getColumnIndex(COLUMN_DESCRIPTION)));
+				product.setPrice(cursor.getDouble(cursor
+						.getColumnIndex(COLUMN_PRICE)));
+				product.setTaxable(cursor.getInt(cursor
+						.getColumnIndex(COLUMN_TAXABLE)) == 0 ? false : true);
+				product.setDate(cursor.getString(cursor
+						.getColumnIndex(COLUMN_CREATED)));
+				product.setModifyDate(cursor.getString(cursor
+						.getColumnIndex(COLUMN_MODIFIED)));
+			}
+		}
+		return product;
+	}
+
+	/**
+	 * Inserts a new product into the database.
+	 * 
+	 * @param product
+	 *            the product to insert
+	 * @return the generated id, or -1 if there was an error, or -2 if an
+	 *         exception occurred
+	 */
+	public long insertProduct(Product product) {
+		long code = -1;
+		try {
+			ContentValues cv = new ContentValues();
+			cv.put(COLUMN_QUANTITY, product.getQuantity());
+			cv.put(COLUMN_GENRE, product.getGenre());
+			cv.put(COLUMN_PLATFORM, product.getPlatform());
+			cv.put(COLUMN_MYSQL_ID, product.getPhpId());
+			cv.put(COLUMN_NAME, product.getName());
+			cv.put(COLUMN_IMAGE_URL, product.getImageURL());
+			cv.put(COLUMN_DESCRIPTION, product.getDescription());
+			cv.put(COLUMN_PRICE, product.getPrice());
+			cv.put(COLUMN_TAXABLE, product.isTaxable() ? 1 : 0);
+			cv.put(COLUMN_CREATED, product.getDate());
+			cv.put(COLUMN_MODIFIED, product.getModifyDate());
+			code = getWritableDatabase().insert(TABLE_NAME, null, cv);
+		} catch (Exception e) {
+			Log.e(tag,
+					"Exception caught while adding a product:\n" + e.getClass()
+							+ " " + e.getMessage());
+			code = -2;
+		}
+		return code;
+	}
+
+}

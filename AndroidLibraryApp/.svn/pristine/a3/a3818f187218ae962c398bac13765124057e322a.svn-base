@@ -1,0 +1,57 @@
+package cs534.team3.phase1;
+
+import com.example.cs534.team3.phase1.R;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+/**
+ * Project Phase 1 : CS Studio
+ * 
+ * @author Caroline Castonguay-Boisvert 0834048
+ * @author Gabriel Gheorgian 0737019
+ * @author Natacha Gabbamonte 0932340
+ * 
+ *         Project CS534.team3.phase1
+ * 
+ */
+public class CostPreview extends Activity {
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.cost_preview);
+
+		addItemsToListView();
+	}
+
+	private void addItemsToListView() {
+		ListView listView = (ListView) findViewById(R.id.costPreview_listView);
+
+		listView.setAdapter(new ArrayAdapter<String>(this,
+				R.layout.centered_textview, new String[] { "Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8","Item1", "Item2",
+				"Item3", "Item4", "Item5", "Item6", "Item7", "Item8" }));
+	}
+
+}

@@ -1,0 +1,55 @@
+<resources>
+
+    <string name="app_name">CG Studio</string>
+    <string name="title_activity_splash">Splash</string>
+
+    <!-- Splash page strings -->
+    <string name="splash_content">This app was created by Caroline Castonguay-Boisvert, Gabriel Gheorghian, and Natacha Gabbamonte.</string>
+    <string name="splash_imagedesc">A funny image</string>
+
+    <!-- Main page strings -->
+    <string name="main_string_button_set">Set prefs</string>
+    <string name="main_string_button_add">Add item</string>
+    <string name="main_string_button_cost">Cost preview</string>
+    <!-- Cost Preview page strings -->
+    <string name="costPreview_backButton">OK</string>
+
+    <!-- Addui page strings -->
+    <string name="addUI_textView_name">Name:</string>
+    <string name="addUI_textView_platform">Platform:</string>
+    <string name="addUI_textView_genre">Genre:</string>
+    <string name="addUI_textView_image">Image:</string>
+    <string name="addUI_textView_quantity">Quantity:</string>
+    <string name="addUI_textView_desc">Description:</string>
+    <string name="addUI_textView_price">Price:</string>
+    <string name="addUI_textView_taxable">Taxable:</string>
+    <string name="addUI_add">Add</string>
+    <string name="addUI_cancel">Cancel</string>
+
+    <!-- Reset preferences strings -->
+    <string name="setprefs_textview_username">Username:</string>
+    <string name="setprefs_textview_email">Email:</string>
+    <string name="setprefs_textview_showSplash">Splash page:</string>
+    <string name="setprefs_button_save">Save</string>
+    <string name="setprefs_button_cancel">Cancel</string>
+
+    <string-array name="platforms">
+        <item>PC</item>
+        <item>Wii</item>
+        <item>XBox</item>
+        <item>PS3</item>
+    </string-array>
+    <string-array name="genres">
+        <item>RPG</item>
+        <item>Puzzle</item>
+        <item>Racing</item>
+        <item>FPS</item>
+        <item>Sport</item>
+        <item>Strategy</item>
+        <item>Platform</item>
+        <item>Fighting</item>
+        <item>Indie</item>
+        <item>Educational</item>
+    </string-array>
+
+</resources>

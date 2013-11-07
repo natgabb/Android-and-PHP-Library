@@ -1,0 +1,130 @@
+package cs534.team3.phase1;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
+import cs534.team3.phase1.R;
+import cs534.team3.phase1.database.AsyncDBHelper;
+import cs534.team3.phase1.database.DBHelper;
+
+import android.app.Activity;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+/**
+ * Project Phase 2 : CS Studio
+ * 
+ * @author Caroline Castonguay-Boisvert 0834048
+ * @author Gabriel Gheorgian 0737019
+ * @author Natacha Gabbamonte 0932340
+ * 
+ *         Project CS534.team3.phase1
+ * 
+ */
+public class CostPreview extends Activity {
+
+	private static double GST_TAX = 0.05;
+	private static double TVQ_TAX = 0.095;
+
+	private AsyncDBHelper asyncDBHelper = null;
+	private ArrayList<Product> allProducts = null;
+	private ArrayList<String> displayText = null;
+	private ListView listView = null;
+	private DecimalFormat moneyFormat;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.cost_preview);
+
+		moneyFormat = new DecimalFormat("$#,##0.00");
+		listView = (ListView) findViewById(R.id.costPreview_listView);
+		asyncDBHelper = Main.getAsyncDBHelper();
+		addItemsToListView();
+	}
+
+	private void addItemsToListView() {
+		allProducts = new ArrayList<Product>();
+		displayText = new ArrayList<String>();
+
+		Cursor cursor = asyncDBHelper.getAllProducts();
+		Product product = null;
+		String text = null;
+
+		if (cursor == null) {
+			Log.i(Main.DEBUG_TAG, "[CostPreview] Cursor is null");
+		} else {
+
+			Toast.makeText(this, "" + cursor.getCount(), Toast.LENGTH_LONG)
+					.show();
+			// Columns indexes
+			int idIndex = cursor.getColumnIndex(DBHelper.COLUMN_ID);
+			int quantityIndex = cursor.getColumnIndex(DBHelper.COLUMN_QUANTITY);
+			int platformIndex = cursor.getColumnIndex(DBHelper.COLUMN_PLATFORM);
+			int genreIndex = cursor.getColumnIndex(DBHelper.COLUMN_GENRE);
+			int nameIndex = cursor.getColumnIndex(DBHelper.COLUMN_NAME);
+			int imageURLIndex = cursor
+					.getColumnIndex(DBHelper.COLUMN_IMAGE_URL);
+			int descriptionIndex = cursor
+					.getColumnIndex(DBHelper.COLUMN_DESCRIPTION);
+			int priceIndex = cursor.getColumnIndex(DBHelper.COLUMN_PRICE);
+			int taxableIndex = cursor.getColumnIndex(DBHelper.COLUMN_TAXABLE);
+			int createdIndex = cursor.getColumnIndex(DBHelper.COLUMN_CREATED);
+			int modifiedIndex = cursor.getColumnIndex(DBHelper.COLUMN_MODIFIED);
+
+			cursor.moveToFirst();
+			do {
+				product = new Product(cursor.getInt(idIndex),
+						cursor.getInt(quantityIndex),
+						cursor.getString(platformIndex),
+						cursor.getString(genreIndex),
+						cursor.getString(nameIndex),
+						cursor.getString(imageURLIndex),
+						cursor.getString(descriptionIndex),
+						cursor.getDouble(priceIndex),
+						cursor.getInt(taxableIndex) != 0,
+						cursor.getString(createdIndex),
+						cursor.getString(modifiedIndex), 0);
+				allProducts.add(product);
+				double price = product.getPrice();
+				text = "[" + product.getName() + "]" + " Price: "
+						+ moneyFormat.format(price);
+				if (product.isTaxable()) {
+					double gst = Math.round(calculateGST(price) * 100) / 100.0;
+					double tvq = Math.round(calculateTVQ(price + gst) * 100) / 100.0;
+					double total = Math.round((price + gst + tvq) * 100) / 100.0;
+					text = text + " GST: " + moneyFormat.format(gst) + " TVQ: "
+							+ moneyFormat.format(tvq) + " Total: "
+							+ moneyFormat.format(total);
+				}
+				displayText.add(text);
+			} while (cursor.moveToNext());
+			Log.i(Main.DEBUG_TAG, "DisplayText size: " + displayText.size());
+			Log.i(Main.DEBUG_TAG, "[CostPreview] End cursor.");
+		}
+
+		listView.setAdapter(new ArrayAdapter<String>(this,
+				R.layout.centered_textview, displayText));
+
+		Toast.makeText(this, displayText.toString(), Toast.LENGTH_LONG).show();
+	}
+
+	public void onOKClick(View v) {
+		finish();
+	}
+
+	private double calculateGST(double price) {
+		return price * GST_TAX;
+	}
+
+	private double calculateTVQ(double price) {
+		return price * TVQ_TAX;
+	}
+
+}

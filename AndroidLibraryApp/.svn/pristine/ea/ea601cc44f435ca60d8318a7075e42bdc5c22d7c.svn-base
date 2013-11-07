@@ -1,0 +1,82 @@
+package cs534.team3.phase1;
+
+import cs534.team3.phase1.R;
+import cs534.team3.phase1.database.AsyncDBHelper;
+
+import android.os.Bundle;
+import android.view.View;
+import android.app.Activity;
+import android.content.Intent;
+
+/**
+ * Project Phase 1 : CS Studio
+ * 
+ * @author Caroline Castonguay-Boisvert 0834048
+ * @author Gabriel Gheorghian 0737019
+ * @author Natacha Gabbamonte 0932340
+ * 
+ *         Project CS534.team3.phase1
+ * 
+ */
+public class Main extends Activity {
+	public static final String TAG = "CGStudio";
+	public static final String DEBUG_TAG = "CGStudio Debug";
+
+	private static AsyncDBHelper asyncDBHelper = null;
+
+	/**
+	 * 
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		asyncDBHelper = new AsyncDBHelper(this, TAG);
+	}
+
+	/**
+	 * Returns the Asynchronous Database Helper.
+	 * 
+	 * @return The AsyncDBHelper Object.
+	 */
+	public static AsyncDBHelper getAsyncDBHelper() {
+		return asyncDBHelper;
+	}
+
+	/**
+	 * OnClickListener for the Cost Preview button.
+	 * 
+	 * @param v
+	 *            the button
+	 */
+	public void startCostPreview(View v) {
+		startActivity(new Intent(this, CostPreview.class));
+	}
+
+	/**
+	 * OnClickListener for the Add Item button.
+	 * 
+	 * @param v
+	 *            the button
+	 */
+	public void startAddItem(View v) {
+		startActivity(new Intent(this, AddItem.class));
+	}
+
+	/**
+	 * OnClickListener for the Set Preferences button.
+	 * 
+	 * @param v
+	 *            the button
+	 */
+	public void startSetPrefs(View v) {
+		startActivity(new Intent(this, SetPrefs.class));
+	}
+
+	// @Override
+	// public boolean onCreateOptionsMenu(Menu menu) {
+	// getMenuInflater().inflate(R.menu.activity_splash, menu);
+	// return true;
+	// }
+
+}

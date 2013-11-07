@@ -1,0 +1,211 @@
+package cs534.team3.phase1;
+
+import java.io.Serializable;
+
+public class Product implements Serializable{
+	private static final long serialVersionUID = 1L;
+	private int _id;
+	private int quantity;
+	private String platform;
+	private String genre;
+	private String name;
+	private String imageURL;
+	private String description;
+	private double price;
+	private boolean taxable;
+	private String date;
+	private String modifyDate;
+	private int phpId;
+	
+	
+	
+	/**
+	 * Default constructor
+	 */
+	public Product(){		  
+		  this(0,0,"","","", "", "", 0.0, false, "", "", 0);
+	}
+	
+	/** Constructor with 12 parameters
+	 * @param _id
+	 * @param quantity
+	 * @param platform
+	 * @param genre
+	 * @param name
+	 * @param image
+	 * @param imageURL
+	 * @param description
+	 * @param price
+	 * @param taxable
+	 * @param date
+	 * @param modifyDate
+	 */
+	public Product(int _id, int quantity, String platform, String genre,
+			String name, String imageURL, String description,
+			double price, boolean taxable, String date, String modifyDate, int phpId) {
+		super();
+		this._id = _id;
+		this.quantity = quantity;
+		this.platform = platform;
+		this.genre = genre;
+		this.name = name;
+		this.imageURL = imageURL;
+		this.description = description;
+		this.price = price;
+		this.taxable = taxable;
+		this.date = date;
+		this.modifyDate = modifyDate;
+		this.phpId = phpId;
+		
+	}
+	
+	/**
+	 * @return the androidId
+	 */
+	public int getPhpId() {
+		return phpId;
+	}
+
+	/**
+	 * @param androidId the androidId to set
+	 */
+	public void setPhpId(int phpId) {
+		this.phpId = phpId;
+	}
+
+
+	/**
+	 * @return the imageURL
+	 */
+	public String getImageURL() {
+		return imageURL;
+	}
+	/**
+	 * @param imageURL the imageURL to set
+	 */
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+	/**
+	 * @return the _id
+	 */
+	public int get_id() {
+		return _id;
+	}
+	/**
+	 * @param _id the _id to set
+	 */
+	public void set_id(int _id) {
+		this._id = _id;
+	}
+	/**
+	 * @return the quantity
+	 */
+	public int getQuantity() {
+		return quantity;
+	}
+	/**
+	 * @param quantity the quantity to set
+	 */
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	/**
+	 * @return the platform
+	 */
+	public String getPlatform() {
+		return platform;
+	}
+	/**
+	 * @param platform the platform to set
+	 */
+	public void setPlatform(String platform) {
+		this.platform = platform;
+	}
+	/**
+	 * @return the genre
+	 */
+	public String getGenre() {
+		return genre;
+	}
+	/**
+	 * @param genre the genre to set
+	 */
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	/**
+	 * @return the price
+	 */
+	public double getPrice() {
+		return price;
+	}
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	/**
+	 * @return the taxable
+	 */
+	public boolean isTaxable() {
+		return taxable;
+	}
+	/**
+	 * @param taxable the taxable to set
+	 */
+	public void setTaxable(boolean taxable) {
+		this.taxable = taxable;
+	}
+	/**
+	 * @return the date
+	 */
+	public String getDate() {
+		return date;
+	}
+	/**
+	 * @param date the date to set
+	 */
+	public void setDate(String date) {
+		this.date = date;
+	}
+	/**
+	 * @return the modifyDate
+	 */
+	public String getModifyDate() {
+		return modifyDate;
+	}
+	/**
+	 * @param modifyDate the modifyDate to set
+	 */
+	public void setModifyDate(String modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+		
+}

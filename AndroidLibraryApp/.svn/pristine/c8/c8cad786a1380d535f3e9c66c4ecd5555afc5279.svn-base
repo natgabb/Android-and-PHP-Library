@@ -1,0 +1,19 @@
+package cs534.team3.phase1;
+
+import cs534.team3.phase1.R;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class AddItem extends Activity {
+
+	/**
+	 * 
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.addui);
+	}
+
+}

@@ -1,0 +1,39 @@
+package cs534.team3.phase1.database;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * 
+ * This class is the link between the activities and the SQLite database.
+ * 
+ * @author Natacha Gabbamonte 0932340
+ * @author Caroline Castonguay-Boisvert 084348
+ * @author Gabriel Gheorghian 0737019
+ * 
+ *         Project CS534.team3.phase1
+ * 
+ */
+public class DBHelper extends SQLiteOpenHelper {
+
+	public DBHelper(Context context, String name, CursorFactory factory,
+			int version) {
+		super(context, name, factory, version);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

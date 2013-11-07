@@ -1,0 +1,9 @@
+<resources>
+
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="button_width">150dp</dimen>
+    <dimen name="label_width">90dp</dimen>
+
+</resources>

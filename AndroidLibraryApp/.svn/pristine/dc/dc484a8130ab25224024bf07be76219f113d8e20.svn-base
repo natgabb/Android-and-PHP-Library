@@ -1,0 +1,30 @@
+package cs534.team3.phase1.database;
+
+import android.content.Context;
+
+/**
+ * This class links the activities to the DBHelper via an AsyncTask.
+ * 
+ * @author Natacha Gabbamonte 0932340
+ * @author Caroline Castonguay-Boisvert 084348
+ * @author Gabriel Gheorghian 0737019
+ * 
+ *         Project CS534.team3.phase1
+ * 
+ */
+public class AsyncDBHelper {
+
+	@SuppressWarnings("unused")
+	private DBHelper database = null;
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param context
+	 *            The context.
+	 */
+	public AsyncDBHelper(Context context, String tag) {
+		database = new DBHelper(context, tag);
+	}
+
+}

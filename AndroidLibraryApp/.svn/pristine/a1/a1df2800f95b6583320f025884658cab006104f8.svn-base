@@ -1,0 +1,42 @@
+package com.example.cs534.team3.phase1;
+
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+
+public class SetPrefs extends Activity {
+
+	private EditText usernameText;
+	private EditText emailText;
+	private CheckBox splashCheckBox;
+
+	/**
+	 * 
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.set_preferences);
+
+		// usernameText = findViewById(R.id.)
+	}
+
+	public void saveSelections(View v) {
+		// Saves the preferences.
+		SharedPreferences prefs = getSharedPreferences("Tag", MODE_PRIVATE);
+		SharedPreferences.Editor preferencesEditor = prefs.edit();
+		// String username =
+		// // for (CheckBox checkBox : checkBoxes)
+		// // preferencesEditor.putBoolean(checkBox.getText().toString(),
+		// // checkBox.isChecked());
+
+		preferencesEditor.commit();
+	}
+
+	public void cancelAndQuit(View v) {
+		finish();
+	}
+}

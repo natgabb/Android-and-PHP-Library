@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical" 
+    android:background="@drawable/background">
+
+    <!-- Buttons -->
+
+    <LinearLayout
+        android:id="@+id/addUI_linearlayout_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/addUI_button_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onAddButtonClick"
+            android:text="@string/addUI_add"
+            android:width="@dimen/button_width" 
+            android:textColor="@color/textColor"/>
+
+        <Button
+            android:id="@+id/addUI_button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onCancelButtonClick"
+            android:text="@string/addUI_cancel"
+            android:width="@dimen/button_width"
+            android:textColor="@color/textColor" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/addUI_linearlayout_buttons"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <!-- Name -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_medium"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/addUI_textView_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/addUI_textView_name"
+                    android:textColor="@color/textColor" />
+
+                <EditText
+                    android:id="@+id/addUI_editText_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:inputType="textCapWords|textNoSuggestions"
+                    android:textColor="@color/textColor" />
+
+            </LinearLayout>
+
+            <!-- Platform -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_medium"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/addUI_textView_platform"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/addUI_textView_platform" 
+                    android:textColor="@color/textColor"/>
+
+                <Spinner
+                    android:id="@+id/addui_spinner_platform"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" 
+                    android:textColor="@color/textColor"/>
+            </LinearLayout>
+
+            <!-- Genre -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_medium"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/addUI_textView_genre"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/addUI_textView_genre" 
+                    android:textColor="@color/textColor"/>
+
+                <Spinner
+                    android:id="@+id/addui_spinner_genre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+            </LinearLayout>
+
+            <!-- Image -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_medium"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/addUI_textView_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/addUI_textView_image"
+                    android:textColor="@color/textColor" />
+
+                <EditText
+                    android:id="@+id/addUI_editText_image"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:inputType="text|textUri" 
+                    android:textColor="@color/textColor"/>
+
+            </LinearLayout>
+
+            <!-- Quantity -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_medium"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/addUI_textView_quantity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/addUI_textView_quantity"
+                    android:textColor="@color/textColor" />
+
+                <EditText
+                    android:id="@+id/addUI_editText_quantity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:inputType="number" 
+                    android:textColor="@color/textColor"/>
+
+            </LinearLayout>
+
+            <!-- Description -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_medium"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/addUI_textView_desc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/addUI_textView_desc" 
+                    android:textColor="@color/textColor"/>
+
+                <EditText
+                    android:id="@+id/addUI_editText_desc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:inputType="text|textMultiLine|textNoSuggestions"
+                    android:minLines="3"
+                    android:scrollbars="vertical" 
+                    android:textColor="@color/textColor"/>
+
+            </LinearLayout>
+
+            <!-- Price -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_medium"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/addUI_textView_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/addUI_textView_price" 
+                    android:textColor="@color/textColor"/>
+
+                <EditText
+                    android:id="@+id/addUI_editText_price"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:inputType="numberDecimal" 
+                    android:textColor="@color/textColor"/>
+
+            </LinearLayout>
+
+            <!-- Taxable -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_medium"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/addUI_textView_taxable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/addUI_textView_taxable" 
+                    android:textColor="@color/textColor"/>
+
+                <CheckBox
+                    android:id="@+id/addUI_checkBox_taxable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" 
+                    android:textColor="@color/textColor"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

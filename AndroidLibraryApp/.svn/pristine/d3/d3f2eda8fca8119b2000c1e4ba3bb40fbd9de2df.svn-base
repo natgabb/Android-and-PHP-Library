@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- Name -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_medium"
+        android:orientation="horizontal" >
+
+        <!-- android:layout_width="wrap_content" -->
+
+        <TextView
+            android:id="@+id/addUI_textView_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/addUI_textView_name" />
+
+        <EditText
+            android:id="@+id/addUI_editText_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:inputType="text|textNoSuggestions" />
+    </LinearLayout>
+
+    <!-- Platform -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_medium"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/addUI_textView_platform"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/addUI_textView_platform" />
+
+        <EditText
+            android:id="@+id/addUI_editText_platform"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:inputType="text|textNoSuggestions" />
+    </LinearLayout>
+
+    <!-- Genre -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_medium"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/addUI_textView_genre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/addUI_textView_genre" />
+
+        <EditText
+            android:id="@+id/addUI_editText_genre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:inputType="text|textNoSuggestions" />
+    </LinearLayout>
+
+    <!-- Image -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_medium"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/addUI_textView_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/addUI_textView_image" />
+
+        <EditText
+            android:id="@+id/addUI_editText_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:inputType="text|textNoSuggestions" />
+    </LinearLayout>
+
+    <!-- Quantity -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_medium"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/addUI_textView_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/addUI_textView_quantity" />
+
+        <EditText
+            android:id="@+id/addUI_editText_quantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:inputType="text|textNoSuggestions" />
+    </LinearLayout>
+
+    <!-- Description -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_medium"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/addUI_textView_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/addUI_textView_desc" />
+
+        <EditText
+            android:id="@+id/addUI_editText_desc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:inputType="text|textNoSuggestions" />
+    </LinearLayout>
+
+    <!-- Price -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_medium"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/addUI_textView_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/addUI_textView_price" />
+
+        <EditText
+            android:id="@+id/addUI_editText_"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:inputType="text|textNoSuggestions" />
+    </LinearLayout>
+
+    <!-- Taxable -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_medium"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/addUI_textView_taxable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/addUI_textView_taxable" />
+
+        <CheckBox
+            android:id="@+id/addUI_textView_checkBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+    </LinearLayout>
+
+    <!-- Buttons -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/addUI_button_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/addUI_add"
+            android:width="@dimen/button_width" />
+
+        <Button
+            android:id="@+id/addUI_button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/addUI_cancel"
+            android:width="@dimen/button_width" />
+    </LinearLayout>
+
+</LinearLayout>

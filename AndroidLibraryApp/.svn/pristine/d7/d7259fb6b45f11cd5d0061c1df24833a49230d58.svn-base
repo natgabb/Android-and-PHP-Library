@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical" 
+    android:background="@drawable/background">
+
+    <Button
+        android:id="@+id/show_search_result_button_backButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:onClick="onCancelButtonClick"
+        android:text="@string/add_search_ui_cancel"
+        android:textColor="@color/textColor" />
+    
+
+</RelativeLayout>

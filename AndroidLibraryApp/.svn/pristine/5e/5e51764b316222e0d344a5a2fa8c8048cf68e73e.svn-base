@@ -1,0 +1,105 @@
+<resources>
+
+    <string name="app_name">CG Studio</string>
+    <string name="title_activity_splash">Team 3</string>
+    
+    
+    <!-- Splash page strings -->
+    <string name="splash_content">This app was created by Caroline Castonguay-Boisvert, Gabriel Gheorghian, and Natacha Gabbamonte.</string>
+    <string name="splash_imagedesc">A funny image</string>
+
+    <!-- Main page strings -->
+    <string name="main_dialog">Product</string>
+    <string name="main_string_button_set">Set prefs</string>
+    <string name="main_string_button_add">Add item</string>
+    <string name="main_string_button_cost">Cost preview</string>
+    <string name="main_quantity_label">Quantity:</string>
+    <string name="main_name_label">Name:</string>
+    <string name="main_genre_label">Genre:</string>
+    <string name="main_platform_label">Platform:</string>
+    <string name="main_noproducts">No items found, populate your list.</string>
+    
+    <!-- Main show/update -->
+    <string name="show_price_label">Price:</string>
+    <string name="show_quantity_label">Quantity:</string>
+    <string name="show_id_label">ID:</string>
+    <string name="show_genre_label">Genre:</string>
+    <string name="show_platform_label">Platform:</string>
+    <string name="show_desc_label">Description:</string>
+    <string name="show_mdate_label">Modify Date:</string>
+    
+    
+    <!-- Cost Preview page strings -->
+    <string name="costPreview_backButton">OK</string>
+    
+    <!-- Search Display page strings -->
+    <string name="search_display_button">Back</string>
+    
+     <!-- Addui page strings -->
+     <string name="add_search_ui_cancel">Cancel</string>
+     <string name="add_search_ui_manual">Manual</string>
+     <string name="add_search_ui_search">Search</string>
+     <string name="add_search_ui_textView_modify">Modify Date:</string>
+     <string name="add_search_ui_button_modify">Choose Date</string>
+     
+    <!-- Addui page strings -->
+    <string name="addUI_textView_name">Name:</string>
+    <string name="addUI_textView_platform">Platform:</string>
+    <string name="addUI_textView_genre">Genre:</string>
+    <string name="addUI_textView_image">Image:</string>
+    <string name="addUI_textView_quantity">Quantity:</string>
+    <string name="addUI_textView_desc">Description:</string>
+    <string name="addUI_textView_price">Price:</string>
+    <string name="addUI_textView_taxable">Taxable:</string>
+    <string name="addUI_add">Add</string>
+    <string name="addUI_cancel">Cancel</string>
+
+    <!-- Reset preferences strings -->
+    <string name="setprefs_textview_username">Username:</string>
+    <string name="setprefs_textview_email">Email:</string>
+    <string name="setprefs_textview_showSplash">Splash page:</string>
+    <string name="setprefs_button_save">Save</string>
+    <string name="setprefs_button_cancel">Cancel</string>
+    <string name="setprefs_dialog_saved">Saved!</string>
+
+    <string-array name="platforms">
+        <item>PC</item>
+        <item>Wii</item>
+        <item>XBox</item>
+        <item>PS3</item>
+    </string-array>
+    <string-array name="genres">
+        <item>RPG</item>
+        <item>Puzzle</item>
+        <item>Racing</item>
+        <item>FPS</item>
+        <item>Sport</item>
+        <item>Strategy</item>
+        <item>Platform</item>
+        <item>Fighting</item>
+        <item>Indie</item>
+        <item>Educational</item>
+    </string-array>
+    
+    <string-array name="platforms_with_all">
+        <item>All</item>
+        <item>PC</item>
+        <item>Wii</item>
+        <item>XBox</item>
+        <item>PS3</item>
+    </string-array>
+    <string-array name="genres_with_all">
+        <item>All</item>
+        <item>RPG</item>
+        <item>Puzzle</item>
+        <item>Racing</item>
+        <item>FPS</item>
+        <item>Sport</item>
+        <item>Strategy</item>
+        <item>Platform</item>
+        <item>Fighting</item>
+        <item>Indie</item>
+        <item>Educational</item>
+    </string-array>
+
+</resources>

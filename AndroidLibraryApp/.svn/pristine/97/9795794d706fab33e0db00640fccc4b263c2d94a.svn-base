@@ -1,0 +1,65 @@
+/**
+ * 
+ */
+package cs534.team3.phase1;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
+/**
+ * Project Phase 2 : CS Studio
+ * 
+ * @author Caroline Castonguay-Boisvert 0834048
+ * @author Gabriel Gheorghian 0737019
+ * @author Natacha Gabbamonte 0932340
+ * 
+ *         Project CS534.team3.phase1
+ * 
+ */
+public class SearchResults extends Activity {
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.search_display);
+
+		Intent i = this.getIntent();
+
+		HttpURLConnection urlConn;
+		try {
+			URL url = new URL("" + i.getStringExtra("query"));
+			urlConn = (HttpURLConnection) url.openConnection();
+			urlConn.setRequestMethod("GET");
+			urlConn.connect();
+			Log.d(Main.TAG, "response: " + urlConn.getResponseCode());
+			InputStream is = urlConn.getInputStream();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// read the InputStream
+
+		Toast.makeText(this, "Query: " + i.getStringExtra("query"),
+				Toast.LENGTH_LONG).show();
+	}
+
+	/**
+	 * Closes this activity.
+	 * 
+	 * @param v
+	 *            the button
+	 */
+	public void onCancelButtonClick(View v) {
+		finish();
+	}
+
+}

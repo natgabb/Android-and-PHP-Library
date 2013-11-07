@@ -1,0 +1,134 @@
+package cs534.team3.phase1.database;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+/**
+ * This class is the link between the activities and the SQLite database.
+ * 
+ * @author Natacha Gabbamonte 0932340
+ * @author Caroline Castonguay-Boisvert 084348
+ * @author Gabriel Gheorghian 0737019
+ * 
+ *         Project CS534.team3.phase1
+ * 
+ */
+public class DBHelper extends SQLiteOpenHelper {
+
+	private static final String DATABASE_NAME = "products.db";
+	private static final int DATABASE_VERSION = 1;
+
+	// Tags for logging
+	private String tag = null;
+	@SuppressWarnings("unused")
+	private String debugTag = null;
+
+	// Table name and columns
+	public static final String TABLE_NAME = "Products";
+	public static final String COLUMN_ID = "_id";
+	public static final String COLUMN_MYSQL_ID = "MySQL_id";
+	public static final String COLUMN_QUANTITY = "Quantity";
+	public static final String COLUMN_GENRE = "Genre";
+	public static final String COLUMN_PLATFORM = "Platform";
+	public static final String COLUMN_NAME = "Name";
+	public static final String COLUMN_IMAGE = "Image";
+	public static final String COLUMN_DESCRIPTION = "Description";
+	public static final String COLUMN_PRICE = "Price";
+	public static final String COLUMN_TAXABLE = "Taxable";
+	public static final String COLUMN_CREATED = "Created";
+	public static final String COLUMN_MODIFIED = "Modified";
+
+	// Creation SQL statement
+	private static final String DATABASE_CREATE = "create table " + TABLE_NAME
+			+ " ( " + COLUMN_ID + " integer primary key autoincrement, "
+			+ COLUMN_MYSQL_ID + " integer not null, " + COLUMN_QUANTITY
+			+ " integer, " + COLUMN_GENRE + " text not null, "
+			+ COLUMN_PLATFORM + " text not null, " + COLUMN_NAME + " text, "
+			+ COLUMN_IMAGE + " text, " + COLUMN_DESCRIPTION + " text "
+			+ COLUMN_PRICE + " real, " + COLUMN_TAXABLE + " integer(1), "
+			+ COLUMN_CREATED + " DATETIME, " + COLUMN_MODIFIED + " DATETIME);";
+
+	/**
+	 * Constructor
+	 * 
+	 * @param context
+	 *            The context
+	 */
+	public DBHelper(Context context, String tag) {
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		this.tag = tag;
+		this.debugTag = tag + " Debug";
+	}
+
+	/**
+	 * Creates the table.
+	 */
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		try {
+			db.execSQL(DATABASE_CREATE);
+		} catch (Exception e) {
+			Log.e(tag,
+					"Exception caught while creating the database:\n"
+							+ e.getClass() + " " + e.getMessage());
+		}
+	}
+
+	/**
+	 * When upgraded the table is dropped and then recreated.
+	 */
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		Log.w(DBHelper.class.getName(), "Upgrading database from version "
+				+ oldVersion + " to " + newVersion
+				+ ". All old data will be destroyed in the process.");
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+		onCreate(db);
+	}
+
+	/**
+	 * Returns all the products contained in the database.
+	 * 
+	 * @return all the products contained in the database
+	 */
+	public Cursor getAllProducts() {
+		return getReadableDatabase().query(TABLE_NAME, null, null, null, null,
+				null, null);
+	}
+
+	/**
+	 * Returns all of the products corresponding to the platforms.
+	 * 
+	 * @param platforms
+	 *            the platform filters
+	 * @return the products that correspond to the platforms
+	 */
+	public Cursor getProductsForPlatforms(String[] platforms) {
+		String whereClause = COLUMN_PLATFORM + " = ?";
+		for (int i = 1; i < platforms.length; i++)
+			whereClause += " OR " + COLUMN_PLATFORM + " = ?";
+
+		return getReadableDatabase().query(TABLE_NAME, null, whereClause,
+				platforms, null, null, null);
+	}
+
+	/**
+	 * Returns all of the products corresponding to the genres.
+	 * 
+	 * @param genres
+	 *            the genre filters
+	 * @return the products that correspond to the genres
+	 */
+	public Cursor getProductsByGenres(String[] genres) {
+		String whereClause = COLUMN_GENRE + " = ?";
+		for (int i = 1; i < genres.length; i++)
+			whereClause += " OR " + COLUMN_GENRE + " = ?";
+
+		return getReadableDatabase().query(TABLE_NAME, null, whereClause,
+				genres, null, null, null);
+	}
+
+}

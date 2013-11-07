@@ -1,0 +1,102 @@
+package cs534.team3.phase1.database;
+
+import java.util.concurrent.ExecutionException;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.os.AsyncTask;
+import android.util.Log;
+
+/**
+ * This class links the activities to the DBHelper via an AsyncTask.
+ * 
+ * @author Natacha Gabbamonte 0932340
+ * @author Caroline Castonguay-Boisvert 084348
+ * @author Gabriel Gheorghian 0737019
+ * 
+ *         Project CS534.team3.phase1
+ * 
+ */
+public class AsyncDBHelper {
+
+	private DBHelper database = null;
+	private String tag = null;
+
+	private static final String GENRE = "GENRE";
+	private static final String PLATFORM = "PLATFORM";
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param context
+	 *            The context.
+	 */
+	public AsyncDBHelper(Context context, String tag) {
+		database = new DBHelper(context, tag);
+		this.tag = tag;
+	}
+
+	/**
+	 * Returns all the products contained in the database.
+	 * 
+	 * @return the products
+	 */
+	public Cursor getAllProducts() {
+		try {
+			return new AsyncQuery().execute().get();
+		} catch (InterruptedException e) {
+			Log.e(tag, e.getClass() + " " + e.getMessage());
+		} catch (ExecutionException e) {
+			Log.e(tag, e.getClass() + " " + e.getMessage());
+		}
+		return null;
+	}
+
+	/**
+	 * Returns all of the products corresponding to the genres.
+	 * 
+	 * @param genres
+	 *            the genre filters
+	 * @return the products that correspond to the genres
+	 */
+	public Cursor getProductsByGenre(String... genres) {
+		try {
+			return new AsyncQuery().execute(new String[] { GENRE }, genres)
+					.get();
+		} catch (InterruptedException e) {
+			Log.e(tag, e.getClass() + " " + e.getMessage());
+		} catch (ExecutionException e) {
+			Log.e(tag, e.getClass() + " " + e.getMessage());
+		}
+		return null;
+	}
+	
+	/**
+	 * Returns all of the products corresponding to the platforms.
+	 * 
+	 * @param platforms
+	 *            the platform filters
+	 * @return the products that correspond to the platforms
+	 */
+	public Cursor getProductsByPlatform(String... platforms) {
+		return null;
+	}
+
+	/*
+	 * The AsyncTask for querying the products.
+	 */
+	private class AsyncQuery extends AsyncTask<String[], Void, Cursor> {
+
+		@Override
+		protected Cursor doInBackground(String[]... params) {
+			if (params.length == 0)
+				return database.getAllProducts();
+			else if (params[0][0].equals(GENRE))
+				return database.getProductsByGenres(params[1]);
+			else if (params[0][0].equals(PLATFORM))
+				return database.getProductsForPlatforms(params[1]);
+
+			return null;
+		}
+	}
+}

@@ -1,0 +1,113 @@
+package cs534.team3.phase1;
+
+import java.util.ArrayList;
+
+import cs534.team3.phase1.R;
+import cs534.team3.phase1.database.AsyncDBHelper;
+import cs534.team3.phase1.database.DBHelper;
+
+import android.app.Activity;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+/**
+ * Project Phase 1 : CS Studio
+ * 
+ * @author Caroline Castonguay-Boisvert 0834048
+ * @author Gabriel Gheorgian 0737019
+ * @author Natacha Gabbamonte 0932340
+ * 
+ *         Project CS534.team3.phase1
+ * 
+ */
+public class CostPreview extends Activity {
+
+	private static double GST_TAX = 0.05;
+	private static double TVQ_TAX = 0.095;
+
+	private AsyncDBHelper asyncDBHelper = null;
+	private ArrayList<Product> allProducts = null;
+	private ArrayList<String> displayText = null;
+	private ListView listView = null;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.cost_preview);
+
+		listView = (ListView) findViewById(R.id.costPreview_listView);
+		asyncDBHelper = Main.getAsyncDBHelper();
+		addItemsToListView();
+	}
+
+	private void addItemsToListView() {
+		allProducts = new ArrayList<Product>();
+		displayText = new ArrayList<String>();
+
+		Cursor cursor = asyncDBHelper.getAllProducts();
+		Product product = null;
+		String text = null;
+
+		if (cursor == null) {
+			Log.i(Main.DEBUG_TAG, "[CostPreview] Cursor is null");
+		} else {
+			while (cursor.moveToNext()) {
+				Log.i(Main.DEBUG_TAG,
+						"[CostPreview] Cursor new record column count: "
+								+ cursor.getColumnCount());
+				product = new Product(cursor.getInt(cursor
+						.getColumnIndex(DBHelper.COLUMN_ID)),
+						cursor.getInt(cursor
+								.getColumnIndex(DBHelper.COLUMN_QUANTITY)),
+						cursor.getString(cursor
+								.getColumnIndex(DBHelper.COLUMN_PLATFORM)),
+						cursor.getString(cursor
+								.getColumnIndex(DBHelper.COLUMN_GENRE)),
+						cursor.getString(cursor
+								.getColumnIndex(DBHelper.COLUMN_NAME)),
+						cursor.getString(cursor
+								.getColumnIndex(DBHelper.COLUMN_IMAGE_URL)),
+						cursor.getString(cursor
+								.getColumnIndex(DBHelper.COLUMN_DESCRIPTION)),
+						cursor.getDouble(cursor
+								.getColumnIndex(DBHelper.COLUMN_PRICE)),
+						cursor.getInt(cursor
+								.getColumnIndex(DBHelper.COLUMN_TAXABLE)) != 0,
+						cursor.getString(cursor
+								.getColumnIndex(DBHelper.COLUMN_CREATED)),
+						cursor.getString(cursor
+								.getColumnIndex(DBHelper.COLUMN_MODIFIED)), 0);
+				allProducts.add(product);
+				double price = product.getPrice();
+				double gst = calculateGST(price);
+				double tvq = calculateTVQ(price + gst);
+				double total = price + gst + tvq;
+				text = product.getName() + " Price: " + price + " GST: " + gst
+						+ " TVQ: " + tvq + " Total: " + total;
+				displayText.add(text);
+			}
+			Log.i(Main.DEBUG_TAG, "[CostPreview] End cursor.");
+		}
+
+		listView.setAdapter(new ArrayAdapter<String>(this,
+				R.layout.centered_textview, displayText));
+	}
+
+	public void onOKClick(View v) {
+		finish();
+	}
+
+	private double calculateGST(double price) {
+		return price * GST_TAX;
+	}
+
+	private double calculateTVQ(double price) {
+		return price * TVQ_TAX;
+	}
+
+}

@@ -1,0 +1,49 @@
+package cs534.team3.phase1;
+
+import com.example.cs534.team3.phase1.R;
+
+import android.os.Bundle;
+import android.view.View;
+import android.app.Activity;
+import android.content.Intent;
+
+/**
+ * Project Phase 1 : CS Studio
+ * 
+ * @author Caroline Castonguay-Boisvert 0834048
+ * @author Gabriel Gheorghian 0737019
+ * @author Natacha Gabbamonte 0932340
+ * 
+ *         Project CS534.team3.phase1
+ * 
+ */
+public class Main extends Activity {
+
+	/**
+	 * 
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+	}
+
+	public void startCostPreview(View v) {
+		startActivity(new Intent(this, CostPreview.class));
+	}
+
+	public void startAddItem(View v) {
+		startActivity(new Intent(this, AddItem.class));
+	}
+
+	public void startSetPrefs(View v) {
+		startActivity(new Intent(this, SetPrefs.class));
+	}
+
+	// @Override
+	// public boolean onCreateOptionsMenu(Menu menu) {
+	// getMenuInflater().inflate(R.menu.activity_splash, menu);
+	// return true;
+	// }
+
+}

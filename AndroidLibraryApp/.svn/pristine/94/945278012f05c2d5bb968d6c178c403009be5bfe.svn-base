@@ -1,0 +1,56 @@
+package com.example.cs534.team3.phase1;
+
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+
+public class SetPrefs extends Activity {
+
+	private EditText usernameText;
+	private EditText emailText;
+	private CheckBox splashCheckBox;
+
+	private SharedPreferences prefs;
+
+	/**
+	 * 
+	 */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.set_preferences);
+
+		prefs = getSharedPreferences(Splash.SHARED_PREFS_TAG, MODE_PRIVATE);
+		usernameText = (EditText) findViewById(R.id.setprefs_edittext_username);
+		emailText = (EditText) findViewById(R.id.setprefs_edittext_email);
+		splashCheckBox = (CheckBox) findViewById(R.id.setprefs_checkbox_splash);
+		loadSelections();
+	}
+
+	private void loadSelections() {
+		usernameText.setText(prefs.getString(Splash.USERNAME_TAG, ""));
+		emailText.setText(prefs.getString(Splash.EMAIL_TAG, ""));
+		splashCheckBox.setChecked(prefs.getBoolean(Splash.WANTS_SPLASH_TAG,
+				true));
+	}
+
+	public void saveSelections(View v) {
+		// Saves the preferences.
+		SharedPreferences.Editor preferencesEditor = prefs.edit();
+		String username = usernameText.getText().toString();
+		String email = emailText.getText().toString();
+		boolean wantsSplash = splashCheckBox.isChecked();
+		preferencesEditor.putString(Splash.USERNAME_TAG, username);
+		preferencesEditor.putString(Splash.EMAIL_TAG, email);
+		preferencesEditor.putBoolean(Splash.WANTS_SPLASH_TAG, wantsSplash);
+
+		preferencesEditor.commit();
+	}
+
+	public void cancelAndQuit(View v) {
+		finish();
+	}
+}

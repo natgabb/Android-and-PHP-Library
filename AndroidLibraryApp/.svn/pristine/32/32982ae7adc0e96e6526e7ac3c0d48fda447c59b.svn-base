@@ -1,0 +1,31 @@
+package cs534.team3.phase1;
+
+import cs534.team3.phase1.R;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+
+public class AddItem extends Activity {
+
+	private Spinner platformsSpinner;
+	private Spinner genresSpinner;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.addui);
+		platformsSpinner = (Spinner) findViewById(R.id.addui_spinner_platform);
+		genresSpinner = (Spinner) findViewById(R.id.addui_spinner_genre);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+				this, R.array.platforms, android.R.layout.simple_spinner_item);
+
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+		platformsSpinner.setAdapter(adapter);
+
+	}
+
+}

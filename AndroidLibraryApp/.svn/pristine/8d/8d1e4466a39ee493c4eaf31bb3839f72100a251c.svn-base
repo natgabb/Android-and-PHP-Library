@@ -1,0 +1,24 @@
+package cs534.team3.phase1.database;
+
+import android.content.Context;
+
+/**
+ * @author 0834048
+ *
+ */
+public class AsyncDBHelper {
+	
+	@SuppressWarnings("unused")
+	private DBHelper database = null;
+	
+	/**
+	 * Constructor.
+	 * 
+	 * @param context
+	 *            The context.
+	 */
+	public AsyncDBHelper(Context context) {
+		database = new DBHelper(context);
+	}
+
+}
